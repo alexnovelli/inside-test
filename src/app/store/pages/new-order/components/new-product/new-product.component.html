@@ -1,0 +1,17 @@
+<header>
+  <h3>Produto {{ idx + 1 }}</h3>
+  <mat-icon aria-hidden="false" fontIcon="close" (click)="removeProduct()"></mat-icon>
+</header>
+
+<section>
+  <mat-form-field>
+    <mat-label>Nome do produto</mat-label>
+    <input matInput [formControl]="getFormControlName('name')" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Descrição do produto</mat-label>
+    <textarea matInput [formControl]="getFormControlName('description')" maxlength="50"></textarea>
+    <mat-hint align="end">{{ getFormControlName('description').value?.length || 0 }} / 50</mat-hint>
+  </mat-form-field>
+</section>

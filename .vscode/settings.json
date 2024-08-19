@@ -1,0 +1,7 @@
+{
+  "prettier.documentSelectors": ["html", "ts", "scss", "json"],
+  "prettier.configPath": ".prettierrc",
+  "prettier.useEditorConfig": false,
+  "editor.formatOnSave": true,
+  "autoimport.showNotifications": false
+}

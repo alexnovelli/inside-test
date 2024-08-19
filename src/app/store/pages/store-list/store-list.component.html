@@ -1,0 +1,73 @@
+<section>
+  <h1>Inside Store - Pedidos</h1>
+
+  <button mat-flat-button color="primary" [routerLink]="'new-order'">Efetuar Novo Pedido</button>
+
+  <div class="main-content">
+    <mat-form-field class="filter" *ngIf="dataControl?.length">
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+      <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
+        <th mat-header-cell *matHeaderCellDef>{{ getColumnName(column) }}</th>
+        <td mat-cell *matCellDef="let element">
+          {{ column === 'date' ? (element[column] | date) : element[column] }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="expandedElement = expandRow(expandedElement, element, $event)">
+            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+          <div
+            class="element-detail"
+            [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+            <ul>
+              <li *ngFor="let product of element.products; let idx = index">
+                <h4>{{ 'Produto ' + (idx + 1) }}</h4>
+                <p><small>Nome: </small>{{ product.name }}</p>
+                <p><small>Descrição: </small>{{ product.description }}</p>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnsToDisplayWithExpand"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandRow(expandedElement, element)"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <div class="no-data-feedback" *ngIf="!this.dataSource.filter; else noResults">
+          <h4>Nenhum pedido efetuado</h4>
+          <p>Clique no botão acima para iniciar um novo pedido.</p>
+        </div>
+        <ng-template #noResults>
+          <div class="no-data-feedback">
+            <h4>Nenhum resultado</h4>
+            <p>Tente digitar outro valor.</p>
+          </div>
+        </ng-template>
+      </tr>
+    </table>
+  </div>
+</section>

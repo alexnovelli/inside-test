@@ -1,0 +1,28 @@
+section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+mat-card-header {
+  margin-bottom: 32px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  > div {
+    width: 100%;
+  }
+}
+
+mat-card-actions {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid #eee;
+  display: flex;
+  padding: 16px;
+  justify-content: flex-end;
+}

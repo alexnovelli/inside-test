@@ -1,0 +1,50 @@
+section {
+  display: flex;
+  flex-flow: column;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.no-data-feedback {
+  padding: 16px 16px 0;
+}
+
+.mat-mdc-header-cell {
+  width: 50%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  flex-flow: row;
+  width: 100%;
+  flex-wrap: wrap;
+
+  li {
+    width: 33%;
+    padding: 0 16px 16px 0;
+    box-sizing: border-box;
+
+    small {
+      display: block;
+    }
+  }
+}
+
+.main-content,
+.filter {
+  width: 100%;
+}
